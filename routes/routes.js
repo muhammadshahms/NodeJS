@@ -8,6 +8,7 @@ const path = require('path');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     var uploadDir = "./uploads";
+
     // Create the uploads directory if it doesn't exist
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir);
@@ -50,8 +51,19 @@ router.post('/add', upload, async (req, res) => {
 
 // Home page route
 router.get("/", (req, res) => {
-  res.render('index', { title: 'HomePage' });
-});
+    Users.find()
+      .exec()
+      .then(users => {
+        res.render("index", {
+          title: "Home Page",
+          users: users
+          
+        });
+      })
+      .catch(err => {
+        res.json({ message: err.message });
+      });
+  });
 
 // Add user page route
 router.get("/add_user", (req, res) => {

@@ -3,6 +3,13 @@
 <div class="container">
     <div class="row">
         <div class="col">
+          <% if (message) { %>
+            <div class="alert alert-warning alert-dismissible fade show alert-<%=message.type%>" role="alert">
+              <strong><%=message.message%></strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% } %>
+          <% if (user != '') { %>
             <table class="table">
                 <thead>
                   <tr>
@@ -14,21 +21,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Muhammad</td>
-                    <td>Image</td>
-                    <td>muhammmadshah@gmail.com</td>
-                    <td>03201294137</td>
-                    <td><a href="" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
-                   <a href="" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
-                </td>
-                  </tr>
+                  <% users.forEach((row,index) => { %>
+                    <tr>
+                      <th scope="row"><%= index %></th>
+                      <td><img src="<%=row.image %>" alt="" class="image-thumbnail"></td>
+                      <td><%= row.name %></td>
+                      <td><%= row.email %></td>
+                      <td><%= row.phone %></td>
+                      <td><a href="/edit/<%=row._id%>" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                        <a href="/delete/<%=row._id%>" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
+                      </td>
+                    </tr>
+                  <% }); %>
                 </tbody>
-              </table>
+            </table>
+          <% } else { %>
+            <h1 class="text-center text-secondary mt-5">No user Found</h1>
+          <% } %>
         </div>
     </div>
 </div>
 
-<%- include('./layout/footer.ejs') %>  
-
+<%- include('./layout/footer.ejs') %>
