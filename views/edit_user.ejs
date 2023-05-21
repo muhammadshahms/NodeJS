@@ -1,0 +1,49 @@
+
+<%- include('./layout/header.ejs') %>
+
+<!-- Inside the body section -->
+<!-- <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editModalLabel"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body"> -->
+        <h1>Edit User (<%= user.name %>)</h1>
+        <form action="/update/<%= user._id %>" method="POST" enctype="multipart/form-data">
+          <div class="mb-4">
+            <label for="name" class="form-label">Enter Your Name</label>
+            <input name="name" type="text" class="form-control" id="name" value="<%= user.name %>">
+            <div id="name" class="form-text"></div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Enter Your Email</label>
+            <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp"
+              value="<%= user.email %>">
+          </div>
+          <div class="mb-4">
+            <label for="phone" class="form-label">Enter Your phone no.</label>
+            <input name="phone" type="tel" class="form-control" id="phone" value="<%= user.phone %>">
+            <div id="emailHelp" class="form-text"></div>
+          </div>
+          <div class="mb-4">
+            <label for="image" class="form-label">Select image</label>
+            <input name="image" type="file" class="form-control" id="image">
+            <img src="/<%= user.image %>" width="100" class="image-thumbnail mt-1">
+            <div id="image" class="form-text"></div>
+          </div>
+          <input type="hidden" name="old_image" value="<%= user.image %>">
+          <button type="submit" class="btn btn-success">Save</button>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<%- include('./layout/footer.ejs') %>
