@@ -1,45 +1,47 @@
 <%- include('./layout/header.ejs') %>
 
 <div class="container">
-    <div class="row">
-        <div class="col">
-          <% if (message) { %>
-            <div class="alert alert-warning alert-dismissible fade show alert-<%=message.type%>" role="alert">
-              <strong><%=message.message%></strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          <% } %>
-          <% if (users != '') { %>
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% users.forEach((row,index) => { %>
-                    <tr>
-                      <th scope="row"><%= index %></th>
-                      <td><img src="<%=row.image %>" alt="" class="image-thumbnail"></td>
-                      <td><%= row.name %></td>
-                      <td><%= row.email %></td>
-                      <td><%= row.phone %></td>
-                      <td><a href="/edit/<%=row._id%>" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
-                        <a href="/delete/<%=row._id%>" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
-                      </td>
-                    </tr>
-                  <% }); %>
-                </tbody>
-            </table>
-          <% } else { %>
-            <h1 class="text-center text-secondary mt-5">No user Found</h1>
-          <% } %>
-        </div>
+  <div class="row">
+    <div class="col">
+      <% if (message) { %>
+      <div class="alert alert-success alert-dismissible fade show alert-<%=message.type%>" role="alert">
+        <strong><%=message.message%></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% } %>
+      <% if (users != '') { %>
+      <table id="userTable" class="table table-striped text-center my-3">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach((row, index) => { %>
+          <tr>
+            <th scope="row"><%= index %></th>
+            <td><img src="<%=row.image%>" alt="" width="50" height="50" class="image-thumbnail"></td>
+            <td><%= row.name %></td>
+            <td><%= row.email %></td>
+            <td><%= row.phone %></td>
+            <td>
+              <a href="/edit/<%=row._id%>" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+              <a href="/delete/<%=row._id%>" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <% } else { %>
+      <h1 class="text-center text-secondary mt-5">No user found</h1>
+      <% } %>
     </div>
+  </div>
 </div>
 
 <%- include('./layout/footer.ejs') %>
